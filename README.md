@@ -95,7 +95,23 @@ Cada obstáculo de `obs.obstacles` tiene:
 
 Cambia `this.version` cada vez que pruebes una estrategia distinta: así podrás comparar tus versiones en los datos.
 
-## 6. Analizar los resultados
+## 6. Evaluar tu agente en muchos niveles: el laboratorio
+
+Ver jugar a tu agente nivel a nivel es lento. En la pantalla de inicio, **Laboratorio de agentes** lo hace jugar sin gráficos en decenas o cientos de niveles, en segundos:
+
+1. Elige **Agente personalizado** (o el de reglas, para comparar).
+2. Marca los niveles predefinidos que quieras y cuántos **niveles procedurales** (semillas consecutivas desde la primera).
+3. Pulsa **Ejecutar**. Verás una fila por nivel y un resumen. La tabla **Comparación de experimentos** reúne todos los que ejecutes en la pestaña.
+
+Cada experimento tiene un `experiment_id` que queda en los datos. **Descargar este experimento** entrega solo sus filas.
+
+- **Compara siempre en las mismas semillas.** Si tu agente y `RuleAgent` juegan niveles distintos, la comparación no vale.
+- **Separa semillas de desarrollo y de evaluación.** Ajusta tu agente con las semillas 1–50 y mide la versión final una sola vez en las 1001–1100. Así sabrás si funciona en niveles que no ha visto.
+- Si tu agente entra en un bucle infinito, el laboratorio lo detiene a los 5 s y te avisa; la página no se congela.
+
+Más detalles en [experimentos](docs/experimentos.md) y en la [práctica de IA](docs/practica-ia.md).
+
+## 7. Analizar los resultados
 
 Los intentos de tu agente se guardan como los de cualquier jugador. Con **Descargar datos** obtienes un ZIP con `sessions.csv`, `attempts.csv` y `events.csv`. En `sessions.csv`, las columnas `mode = student`, `agent_name`, `agent_version` y `agent_params` identifican qué agente jugó y con qué parámetros.
 
@@ -104,16 +120,16 @@ Los intentos de tu agente se guardan como los de cualquier jugador. Con **Descar
 
 Usa **Borrar datos** antes de una prueba si quieres un dataset limpio.
 
-> Si tu agente no usa azar ni memoria, repetirá **exactamente** el mismo intento cada vez. Para medirlo bien, pruébalo en varios niveles procedurales (semillas distintas) en lugar de contar muchos intentos idénticos.
+> Si tu agente no usa azar ni memoria, repetirá **exactamente** el mismo intento cada vez. Para medirlo bien, usa el laboratorio con muchos niveles procedurales (semillas distintas) en lugar de contar muchos intentos idénticos.
 
-## 7. Reglas
+## 8. Reglas
 
 - Modifica solo `agents/StudentAgent.js`.
 - No uses `Math.random()` si quieres resultados reproducibles. Si lo usas, dilo en tu informe.
 - `decide()` se ejecuta 120 veces por segundo: evita bucles largos. Un bucle infinito congela la pestaña (ciérrala y vuelve a abrirla).
 - El agente solo puede usar la información de `obs`.
 
-## 8. Entregar tu agente
+## 9. Entregar tu agente
 
 1. Haz commit y push de tus cambios:
 
@@ -126,7 +142,7 @@ Usa **Borrar datos** antes de una prueba si quieres un dataset limpio.
 2. Publica tu juego con tu agente: en tu repositorio, **Settings → Pages → Build and deployment → Deploy from a branch → `main` / `(root)` → Save**. En uno o dos minutos estará en `https://<tu-usuario>.github.io/<tu-repo>/`.
 3. Entrega el enlace del repositorio y el de la página, como indique tu docente.
 
-## 9. Problemas frecuentes
+## 10. Problemas frecuentes
 
 | Problema | Solución |
 |---|---|
@@ -134,5 +150,5 @@ Usa **Borrar datos** antes de una prueba si quieres un dataset limpio.
 | «StudentAgent.decide() devolvió …» | `decide()` debe devolver exactamente `'JUMP'` o `'WAIT'` (en mayúsculas y entre comillas), en todos los caminos del código |
 | «… no tiene export default» | El archivo debe contener `export default class StudentAgent { … }` |
 | Mis cambios no se ven | Guarda el archivo y vuelve a pulsar **Comenzar**. Si no basta, recarga la página con `Ctrl + Shift + R` (`Cmd + Shift + R` en Mac) |
-| La página se congela | Probablemente hay un bucle infinito en `decide()`. Cierra la pestaña, corrige el código y vuelve a abrir el juego |
+| La página se congela | Probablemente hay un bucle infinito en `decide()` durante una partida en pantalla. Cierra la pestaña, corrige el código y vuelve a abrir el juego. En el laboratorio, el bucle se detiene solo a los 5 s |
 | `console.log` llena la consola | `decide()` se llama 120 veces por segundo: registra solo cuando algo cambie (por ejemplo, cuando decidas saltar) |
