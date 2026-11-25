@@ -113,6 +113,8 @@ Más detalles en [experimentos](docs/experimentos.md) y en la [práctica de IA](
 
 ## 7. Analizar los resultados
 
+Para una primera mirada, pulsa **Analizar en el panel** al terminar un experimento: el **Panel de analítica** muestra dónde y contra qué tipo de obstáculo choca tu agente, a qué distancia salta ante cada tipo y una tabla que compara tus versiones con `RuleAgent`. Los filtros permiten ver un experimento, un nivel o una modalidad.
+
 Los intentos de tu agente se guardan como los de cualquier jugador. Con **Descargar datos** obtienes un ZIP con `sessions.csv`, `attempts.csv` y `events.csv`. En `sessions.csv`, las columnas `mode = student`, `agent_name`, `agent_version` y `agent_params` identifican qué agente jugó y con qué parámetros.
 
 - [Guía del dataset](docs/guia-datos.md): qué significa cada tabla y cómo analizarla.
